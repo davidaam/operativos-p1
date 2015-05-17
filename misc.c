@@ -84,13 +84,39 @@ void sort_lstr (Lista* l) {
 	int i,j = 0;
 	for (i=0; i < l->tam-1; i++) {
 		for (j=0; j < l->tam-i; j++) {
-			sort_par(aux->sig->val,aux->val);
+			sort_str(aux->val,aux->sig->val);
 			aux = aux->sig;
 		}
 		aux_base = aux_base->sig;
 		aux = aux_base;
 	}
 }
+
+/*
+Toma dos pares y guarda en a el apuntador al par de menor
+orden lexicográfico y en b el de mayor
+
+@param Par* a
+@param Par* b
+
+*/
+void sort_par (Par* a, Par* b) {
+	Par* tmp;
+	int comp = strcmp(a->p1,b->p1);
+	if (comp > 0) {
+		tmp = a;
+		a = b;
+		b = tmp;
+	}
+	else if (comp == 0) {
+		if (strcmp(a->p2,b->p2) > 0) {
+			tmp = a;
+			a = b;
+			b = tmp;
+		}
+	}
+}
+
 
 /*
 Toma una lista enlazada de Par y la ordena 
@@ -101,5 +127,16 @@ lexicograficamente usando Bubblesort
 */
 
 void sort_lpar (Lista* l) {
-	
+	// Bubblesort
+	Nodo* aux_base = l->ini;
+	Nodo* aux = aux_base;
+	int i,j = 0;
+	for (i=0; i < l->tam-1; i++) {
+		for (j=0; j < l->tam-i; j++) {
+			sort_par(aux->val,aux->sig->val);
+			aux = aux->sig;
+		}
+		aux_base = aux_base->sig;
+		aux = aux_base;
+	}
 }
