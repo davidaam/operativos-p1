@@ -58,7 +58,7 @@ mayor en el segundo
 @param char* b
 
 */
-void sort_par (char* a, char* b) {
+void sort_str (char* a, char* b) {
 	char* tmp;
 	if (strcmp(a,b) > 0) {
 		tmp = (char*)malloc(strlen(a)*sizeof(char));

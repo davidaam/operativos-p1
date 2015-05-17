@@ -31,7 +31,7 @@ char* leerLinea(FILE*);
 Nodo* nuevoNodo(void*);
 void agregarNodo(Lista*,Nodo*);
 Persona* parseLinea(FILE*);
-void sort_par(char*,char*);
+void sort_str(char*,char*);
 void sort_lstr(Lista*);
 void sort_lpar(Lista*);
 #endif
