@@ -1,4 +1,4 @@
-#include "map.h"
+#include "reduce.h"
 
 int main() {
 	FILE* fp = fopen("data","r+");
@@ -13,5 +13,6 @@ int main() {
 	}
 	sort_lista(ldef,PAR);
 	imprimir_lpar(stdout,ldef);
+	imprimir_par(stdout,reduce((Par*)ldef->head->val,(Par*)ldef->head->sig->val));
 	return 0;
 }

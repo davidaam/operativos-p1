@@ -4,5 +4,5 @@
 #include "misc.h"
 
 Lista* map(Persona*);
-Par* crearPar(Persona*,char*);
+Par* crearPar(char*,char*,Lista*);
 #endif
