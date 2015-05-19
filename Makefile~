@@ -4,6 +4,8 @@ misc.o:	misc.h misc.c
 	gcc -c misc.c
 map.o: map.h misc.h
 	gcc -c map.c
+reduce.o: map.h reduce.h
+	gcc -c reduce.c
 clean:
 	rm main
 	rm *.o
