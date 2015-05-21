@@ -52,4 +52,5 @@ void sort_lista(Lista*, TIPO t);
 void imprimir_par(FILE*,Par*);
 void imprimir_lpar(FILE*,Lista*);
 RedSocial* leerRedSocial(FILE*);
+Nodo* desplazarNodo(Nodo*, int desp);
 #endif
