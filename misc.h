@@ -36,21 +36,22 @@ struct Par {
 };
 typedef struct Par Par;
 
-struct RedSocial {
-	Lista* usuarios; // Lista de Persona
+struct Archivo {
+	char** contenido;
+	int lineas;
 };
-typedef struct RedSocial RedSocial;
+typedef struct Archivo Archivo;
 
 char* leerLinea(FILE*);
 Nodo* nuevoNodo(void*);
 void agregarNodo(Lista*,Nodo*);
 Lista* concatListas(Lista*,Lista*);
-Persona* leerPersona(FILE*);
+Persona* crearPersona(char*);
 Par* leerPar(FILE*);
 void sort_str(char**,char**);
 void sort_lista(Lista*, TIPO t);
 void imprimir_par(FILE*,Par*);
 void imprimir_lpar(FILE*,Lista*);
-RedSocial* leerRedSocial(FILE*);
 Nodo* desplazarNodo(Nodo*, int desp);
+int contarDigitos(int);
 #endif
