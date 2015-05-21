@@ -34,7 +34,7 @@ Lista* map(Persona* p) {
 		// adecuadamente ordenados
 		sort_str(&par->p1,&par->p2);
 
-		agregarNodo(l,nuevoNodo(par,PAR));
+		agregarNodo(l,nuevoNodo(par));
 		aux = aux->sig;
 	}
 	return l;

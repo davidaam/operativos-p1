@@ -8,7 +8,7 @@ Par* reduce (Par* p1, Par* p2) {
 	while (aux1 != NULL && aux2 != NULL) {
 		int comp = strcmp((char*)aux1->val,(char*)aux2->val);
 		if (comp == 0) {
-			agregarNodo(l,nuevoNodo(aux1->val,STR));
+			agregarNodo(l,nuevoNodo(aux1->val));
 			aux1 = aux1->sig;
 			aux2 = aux2->sig;
 		}

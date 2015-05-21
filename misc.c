@@ -50,7 +50,7 @@ procesados en la estructura Persona
 @return Persona* : Apuntador a Persona con los datos
 de la linea 
 */
-Persona* parseLinea(FILE* fp) {
+Persona* leerPersona(FILE* fp) {
 	Persona* p = (Persona*)malloc(sizeof(Persona));
 	char delim[4] = " ->";
 	char* tok;
@@ -61,7 +61,7 @@ Persona* parseLinea(FILE* fp) {
 	p->amigos = (Lista*)malloc(sizeof(Lista));
 
 	while ((tok = strtok(NULL,delim)) != NULL) {
-		agregarNodo(p->amigos,nuevoNodo(tok,STR));
+		agregarNodo(p->amigos,nuevoNodo(tok));
 	}
 	// Nos aseguramos que toda lista de amigos
 	// este ordenada
@@ -77,7 +77,7 @@ del nodo a crear
 
 @return Nodo : Nodo con el valor pasado
 */
-Nodo* nuevoNodo(void* val,TIPO t) {
+Nodo* nuevoNodo(void* val) {
 	Nodo* n = (Nodo*)malloc(sizeof(Nodo));
 	n->val = val;
 	return n;
@@ -212,4 +212,42 @@ void imprimir_lpar(FILE* fp,Lista* l) {
 		imprimir_par(fp,(Par*)aux->val);
 		aux = aux->sig;
 	}
+}
+
+RedSocial* leerRedSocial(FILE* fp) {
+	RedSocial* red = (RedSocial*)malloc(sizeof(RedSocial));
+	red->usuarios = (Lista*)malloc(sizeof(Lista));
+	while (!finArchivo(fp)) {
+		// Nodo de Persona leída
+		Nodo* n = nuevoNodo(leerPersona(fp));
+		agregarNodo(red->usuarios,n);
+	}
+	return red;
+}
+
+Par* leerPar(FILE* fp) {
+	Par* p = (Par*)malloc(sizeof(Par));
+	char* tmp;
+	char* delim = " ()";
+	char* linea = leerLinea(fp);
+	p->p1 = strtok(linea,delim);
+	p->p2 = strtok(NULL,delim);
+	p->comun = (Lista*)malloc(sizeof(Lista));
+	while ((tmp = strtok(NULL,delim)) != NULL) {
+		agregarNodo(p->comun,nuevoNodo(tmp));
+	}
+	return p;
+}
+
+
+/* Dada la direccion de un nodo, te devuelve el i-esimo nodo,
+   después de éste. Si no es posible devuelve NULL
+*/
+Nodo* desplazarNodo(Nodo* n, int desp) {
+	Nodo* aux = n;
+	while (desp > 0 && aux != NULL) {
+		aux = aux->sig;
+		desp--;
+	}
+	return aux;
 }
