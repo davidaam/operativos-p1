@@ -209,7 +209,7 @@ void imprimir_lpar(FILE* fp,Lista* l) {
 Par* leerPar(FILE* fp) {
 	Par* p = (Par*)malloc(sizeof(Par));
 	char* tmp;
-	char* delim = " ()";
+	char* delim = " ->()";
 	char* linea = leerLinea(fp);
 	p->p1 = strtok(linea,delim);
 	p->p2 = strtok(NULL,delim);
