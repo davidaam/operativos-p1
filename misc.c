@@ -41,20 +41,11 @@ char* leerLinea(FILE* fuente)
     return realloc(string, sizeof(char)*i);
 }
 
-/*
-Lee una linea de la entrada y devuelve los datos
-procesados en la estructura Persona
 
-@param FILE* fp : Apuntador al archivo de entrada
-
-@return Persona* : Apuntador a Persona con los datos
-de la linea 
-*/
-Persona* leerPersona(FILE* fp) {
+Persona* crearPersona(char* linea) {
 	Persona* p = (Persona*)malloc(sizeof(Persona));
 	char delim[4] = " ->";
 	char* tok;
-	char* linea = leerLinea(fp);
 	
 	tok = strtok(linea,delim);
 	p->nombre = tok;
@@ -214,16 +205,6 @@ void imprimir_lpar(FILE* fp,Lista* l) {
 	}
 }
 
-RedSocial* leerRedSocial(FILE* fp) {
-	RedSocial* red = (RedSocial*)malloc(sizeof(RedSocial));
-	red->usuarios = (Lista*)malloc(sizeof(Lista));
-	while (!finArchivo(fp)) {
-		// Nodo de Persona leída
-		Nodo* n = nuevoNodo(leerPersona(fp));
-		agregarNodo(red->usuarios,n);
-	}
-	return red;
-}
 
 Par* leerPar(FILE* fp) {
 	Par* p = (Par*)malloc(sizeof(Par));
@@ -239,7 +220,40 @@ Par* leerPar(FILE* fp) {
 	return p;
 }
 
+Archivo* leerArchivo(FILE* fp) {
+	int nlineas = contarLineas(fp);
+	char** contenido = (char**)malloc(sizeof(char*)*nlineas);	
+	int i;
+	for(i = 0; i < nlineas; i++) {
+		contenido[i] = leerLinea(fp);
+	}
+	Archivo* a = (Archivo*)malloc(sizeof(Archivo));
+	a->contenido = contenido;
+	a->lineas = nlineas;
 
+	return a;
+}
+
+int contarLineas(FILE* fp) {
+	char c;
+	int count = 1;
+	while (!finArchivo(fp)) {
+		if ((c = fgetc(fp)) == '\n') {
+			count++;
+		}
+	}
+	rewind(fp);
+	return count;
+}
+
+int contarDigitos(int n) {
+	int dig = 0;
+	while (n >= 1) {
+		n /= 10;
+		dig++;
+	}
+	return dig;
+}
 /* Dada la direccion de un nodo, te devuelve el i-esimo nodo,
    después de éste. Si no es posible devuelve NULL
 */
