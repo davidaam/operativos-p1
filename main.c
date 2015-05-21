@@ -2,6 +2,8 @@
 #include <unistd.h>
 #include <sys/types.h>
 
+int dig_pid = 0;
+
 int main(int argc, char* argv[]) {
 	FILE* fp = fopen("data","r+");
 	Lista* lmap = (Lista*)malloc(sizeof(Lista));
@@ -55,7 +57,7 @@ int main(int argc, char* argv[]) {
 	for (i=0; i < nprocs_map; i++) {
 		wait(NULL);
 		printf("Estoy orgulloso de ti!\n");
-
+		
 	}
 
 	return 0;
